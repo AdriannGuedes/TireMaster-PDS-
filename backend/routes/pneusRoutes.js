@@ -5,7 +5,8 @@ import {
   obterPorMedida,
   criarPneu,
   atualizarPneu,
-  excluirPneu
+  excluirPneu,
+  adicionarEstoque
 } from '../controllers/pneusController.js';
 
 import { verificarToken } from '../middlewares/authMiddleware.js';
@@ -20,5 +21,6 @@ router.get('/medida/:medida', obterPorMedida);
 router.post('/cadastrarPneu', criarPneu);
 router.put('/:id', atualizarPneu);
 router.delete('/delete/:id', excluirPneu);
+router.patch('/addEstoque', adicionarEstoque);
 
 export default router;
