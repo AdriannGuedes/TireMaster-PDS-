@@ -8,32 +8,47 @@ const pneusRef = db.collection('Pneus');
 export const criarVenda = async (itens) => {
     let valorTotal = 0;
     const batch = db.batch();
+    const itensComValores = [];
 
-    // Primeiro, verifica e atualiza o estoque dos pneus
     for (const item of itens) {
-        const pneuDocRef = pneusRef.doc(item.pneuId);
-        const pneuSnap = await pneuDocRef.get();
+        // Buscar o pneu pela marca e medida
+        const pneuQuery = await pneusRef
+            .where('marca', '==', item.marca)
+            .where('medida', '==', item.medida)
+            .limit(1)
+            .get();
 
-        if (!pneuSnap.exists) {
-            throw new Error(`Pneu com ID ${item.pneuId} não encontrado.`);
+        if (pneuQuery.empty) {
+            return {
+                erro: `Pneu ${item.marca} ${item.medida} não encontrado.`
+            };
         }
 
-        const pneu = pneuSnap.data();
+        const pneuDoc = pneuQuery.docs[0];
+        const pneu = pneuDoc.data();
         const estoqueAtual = pneu.quantidade || 0;
 
         if (estoqueAtual < item.quantidade) {
             return {
-                erro: `Estoque insuficiente para o pneu ${item.pneuId}. Disponível: ${estoqueAtual}, solicitado: ${item.quantidade}`
+                erro: `Estoque insuficiente para o pneu ${item.marca} ${item.medida}. Disponível: ${estoqueAtual}, solicitado: ${item.quantidade}`
             };
         }
 
+        const valorUnitario = pneu.preco || 0;
         const novoEstoque = estoqueAtual - item.quantidade;
 
         // Atualiza o estoque
-        batch.update(pneuDocRef, { quantidade: novoEstoque });
+        batch.update(pneusRef.doc(pneuDoc.id), { quantidade: novoEstoque });
 
         // Soma ao valor total
-        valorTotal += item.valorUnitario * item.quantidade;
+        valorTotal += valorUnitario * item.quantidade;
+
+        // Salva dados completos para o item
+        itensComValores.push({
+            pneuId: pneuDoc.id,
+            quantidade: item.quantidade,
+            valorUnitario
+        });
     }
 
     // Cria o documento da venda
@@ -44,7 +59,7 @@ export const criarVenda = async (itens) => {
     });
 
     // Adiciona os itens da venda
-    itens.forEach(item => {
+    for (const item of itensComValores) {
         const itemDoc = itensVendaRef.doc();
         batch.set(itemDoc, {
             vendaId: vendaDoc.id,
@@ -52,10 +67,23 @@ export const criarVenda = async (itens) => {
             quantidade: item.quantidade,
             valorUnitario: item.valorUnitario,
         });
-    });
+    }
 
     // Executa tudo de uma vez
     await batch.commit();
+
+    // Verifica novamente o estoque para gerar notificação se necessário
+    for (const item of itensComValores) {
+        const pneuSnap = await pneusRef.doc(item.pneuId).get();
+        const pneu = pneuSnap.data();
+
+        if (pneu.quantidade <= 4) {
+            await db.collection('Notificacoes').add({
+                data: Timestamp.now(),
+                mensagem: `Pneu ${pneu.marca} ${pneu.medida} está com estoque baixo: ${pneu.quantidade}`
+            });
+        }
+    }
 
     return vendaDoc.id;
 };
