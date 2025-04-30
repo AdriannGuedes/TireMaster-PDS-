@@ -1,0 +1,127 @@
+.estoque-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+}
+
+.estoque-container h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+.filter-item {
+    width: 20%;
+    margin-right: 22px;
+}
+
+.filter-item input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+}
+
+.filter-item input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.pneu-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pneu-list {
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.pneu-list th,
+.pneu-list td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.pneu-list th {
+    background-color: #50a5ff;
+    color: white;
+}
+
+.pneu-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.pneu-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+.pneu-list p {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}
+
+.btn-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaço entre os botões */
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    border: 2px solid black; /* borda preta */
+    border-radius: 6px;
+    background-color: transparent; /* sem cor de fundo */
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    transition: background-color 0.3s, color 0.3s; /* para padronizar tamanho */
+}
+
+/* Botão Editar - amarelo */
+.btn-edit {
+    color: #FFD700; /* Amarelo ouro */
+}
+
+.btn-edit:hover {
+    background-color: rgba(255, 215, 0, 0.2); /* leve amarelo ao passar o mouse */
+}
+
+
+/* Botão Deletar - vermelho */
+.btn-delete {
+    color: #FF0000; /* Vermelho */
+}
+
+.btn-delete:hover {
+    background-color: rgba(255, 0, 0, 0.2); /* leve vermelho ao passar o mouse */
+}
+
+/* Célula de ações centralizada */
+td:last-child {
+    text-align: center;
+}
