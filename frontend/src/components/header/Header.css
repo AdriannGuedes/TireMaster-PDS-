@@ -1,13 +1,13 @@
 .header {
   height: 41px;
-  background-color: #005fdb; /* Azul forte */
+  background-color: #005fdb; 
   display: flex;
-  justify-content: space-between; /* Distribui os itens, um à esquerda e o outro à direita */
-  align-items: center; /* Alinha verticalmente ao centro */
+  justify-content: space-between; 
+  align-items: center; 
   color: #202020;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 20px; /* Adiciona espaçamento nas laterais */
+  padding: 0 20px; 
 }
 
 .header h1 {
@@ -16,8 +16,8 @@
   margin: 0;
   text-align: center;
   font-family: 'Playfair Display', serif;
-  flex-grow: 1; /* Faz o h1 ocupar o máximo de espaço possível */
-  text-align: center; /* Garante que o texto esteja no centro */
+  flex-grow: 1; 
+  text-align: center; 
 }
 
 .header svg { 

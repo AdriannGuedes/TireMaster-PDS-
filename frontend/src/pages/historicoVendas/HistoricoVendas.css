@@ -1,0 +1,89 @@
+.historico-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.historico-container h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.mensagem {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}
+
+.venda-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.itens-scroll {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 6px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.itens-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.itens-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.item-descricao {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-descricao:hover {
+    background-color: #f1f1f1;
+}
+
+.valor-unit {
+    font-weight: bold;
+    color: #444;
+}
+
+.venda-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.venda-data{
+ padding-left: 15px;
+}
+.venda-total {
+    padding-right: 20px;
+}

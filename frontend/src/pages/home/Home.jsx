@@ -3,17 +3,21 @@ import axios from 'axios';
 import './Home.css';
 
 const Home = () => {
-  const [notificacoes, setNotificacoes] = useState([]); 
+  const [notificacoes, setNotificacoes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     buscarNotificacoes();
   }, []);
 
   const buscarNotificacoes = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/notificacoes/newNotificacoes');
+      const response = await axios.get('http://localhost:3000/notificacoes/notifNaoLidas');
       setNotificacoes(response.data);
     } catch (error) {
       console.error('Erro ao buscar notificações:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -23,7 +27,9 @@ const Home = () => {
     <div className="home-container">
       <h2>Atenção! Estoque baixo!</h2>
       <div className="cards-container">
-        {notificacoesParaExibir.length > 0 ? (
+        {loading ? (
+          <p>Carregando notificações...</p>
+        ) : notificacoesParaExibir.length > 0 ? (
           notificacoesParaExibir.map((notificacao, index) => (
             <div key={index} className="card">
               <div className="card-header"></div>
@@ -32,7 +38,7 @@ const Home = () => {
             </div>
           ))
         ) : (
-          <p>Carregando notificações...</p>
+          <p>Sem novas notificações.</p>
         )}
       </div>
     </div>

@@ -1,0 +1,110 @@
+.venda-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    max-height: 63vh;
+    overflow-y: auto;
+}
+
+.venda-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 0;
+    font-size: 26px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.venda-container .form-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.venda-container select,
+.venda-container input {
+    flex: 1;
+    padding: 8px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.venda-container select:focus,
+.venda-container input:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+}
+
+.venda-container .form-item button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.venda-container .form-item button:hover {
+    background-color: #0056b3;
+}
+
+.venda-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.venda-container th,
+.venda-container td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-family: 'Roboto', sans-serif;
+}
+
+.venda-container th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: bold;
+}
+
+.venda-container button {
+    padding: 10px;
+    background-color:  #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.venda-container button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.venda-container button:hover:enabled {
+    background-color: #0066ff;
+}
+
+.venda-container .mensagem {
+    text-align: center;
+    color: #3849ff;
+    margin-bottom: 12px;
+    font-weight: bold;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Estoque.css';
 import FormEditarPneuModal from '../../components/modalEditarPneu/ModalEditarPneu.jsx';
+import ModalConfirmacao from '../../components/modalExcluirPneu/ModalExcluirPneu.jsx';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const Estoque = () => {
@@ -40,19 +41,28 @@ const Estoque = () => {
         handleFilter();
     }, [marca, medida]);
 
-    const handleDelete = async (id) => {
-        if (!window.confirm('Tem certeza que deseja excluir este pneu?')) return;
+    const [idParaExcluir, setIdParaExcluir] = useState(null)
 
+    const handleDelete = async (id) => {
+        setIdParaExcluir(id); 
+    };
+
+    const confirmarExclusao = async () => {
         const token = localStorage.getItem('authToken');
         try {
-            await axios.delete(`http://localhost:3000/pneus/delete/${id}`, {
+            await axios.delete(`http://localhost:3000/pneus/delete/${idParaExcluir}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             fetchPneus();
         } catch (error) {
             console.error('Erro ao excluir pneu', error);
-            alert('Erro ao excluir pneu.');
+        } finally {
+            setIdParaExcluir(null); 
         }
+    };
+
+    const cancelarExclusao = () => {
+        setIdParaExcluir(null);
     };
 
     const handleEdit = (pneu) => {
@@ -135,12 +145,19 @@ const Estoque = () => {
                 </div>
             </div>
 
-            {/* Modal de Edição */}
             {pneuEditando && (
                 <FormEditarPneuModal
                     pneu={pneuEditando}
                     onSave={handleSaveEdit}
                     onClose={() => setPneuEditando(null)}
+                />
+            )}
+
+            {idParaExcluir && (
+                <ModalConfirmacao
+                    mensagem="Tem certeza que deseja excluir este pneu?"
+                    onConfirmar={confirmarExclusao}
+                    onCancelar={cancelarExclusao}
                 />
             )}
         </>

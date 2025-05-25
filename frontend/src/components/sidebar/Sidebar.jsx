@@ -22,13 +22,13 @@ const Sidebar = ({ onLogout }) => {
           <span className="menu-section">PNEUS</span>
           <li><Link to="/cadastro"><FaPlus /> Cadastrar</Link></li>
           <li><Link to="/estoque"><FaBoxOpen /> Estoque</Link></li>
-          <li><Link to="/relatorios"><FaChartBar /> Relatórios</Link></li>
+          <li><Link to="/relatoriosVendas"><FaChartBar /> Relatórios</Link></li>
 
           <span className="menu-section">VENDAS</span>
-          <li><Link to="/nova-venda"><FaShoppingCart /> Nova venda</Link></li>
-          <li><Link to="/historico"><FaHistory /> Histórico de vendas</Link></li>
+          <li><Link to="/novaVenda"><FaShoppingCart /> Nova venda</Link></li>
+          <li><Link to="/historicoVendas"><FaHistory /> Histórico de vendas</Link></li>
 
-          <li><Link to="/notificacoes"><FaEnvelope /> Notificações</Link></li>
+          <li><Link to="/historicoNotificacoes"><FaEnvelope /> Notificações</Link></li>
         </ul>
       </nav>
 

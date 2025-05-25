@@ -23,7 +23,7 @@ const ModalEditarPneu = ({ pneu, onSave, onClose }) => {
       marca,
       medida,
       preco,
-      quantidade,
+      quantidade: parseInt(quantidade),
     });
   };
 

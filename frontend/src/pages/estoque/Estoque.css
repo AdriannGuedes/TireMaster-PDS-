@@ -18,6 +18,11 @@
     margin-top: 5px;
 }
 
+.scrow {
+    max-height: 205px; /* Ajuste a altura conforme necessário */
+    overflow-y: auto; /* Permite a rolagem vertical */
+}
+
 .filters {
     display: flex;
     justify-content: space-between;
@@ -53,6 +58,8 @@
 .pneu-list {
     overflow-y: auto;
     max-height: 150px;
+    border-radius: 5px;
+    overflow-y: auto;
 }
 
 .pneu-list th,
@@ -85,43 +92,43 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Espaço entre os botões */
+    gap: 10px; 
 }
 
 .btn-edit, .btn-delete {
     padding: 5px 10px;
-    border: 2px solid black; /* borda preta */
+    border: 2px solid black; 
     border-radius: 6px;
-    background-color: transparent; /* sem cor de fundo */
+    background-color: transparent; 
     cursor: pointer;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 40px;
-    transition: background-color 0.3s, color 0.3s; /* para padronizar tamanho */
+    transition: background-color 0.3s, color 0.3s; 
 }
 
-/* Botão Editar - amarelo */
+
 .btn-edit {
-    color: #FFD700; /* Amarelo ouro */
+    color: #FFD700; 
 }
 
 .btn-edit:hover {
-    background-color: rgba(255, 215, 0, 0.2); /* leve amarelo ao passar o mouse */
+    background-color: rgba(255, 215, 0, 0.2); 
 }
 
 
-/* Botão Deletar - vermelho */
+
 .btn-delete {
-    color: #FF0000; /* Vermelho */
+    color: #FF0000; 
 }
 
 .btn-delete:hover {
-    background-color: rgba(255, 0, 0, 0.2); /* leve vermelho ao passar o mouse */
+    background-color: rgba(255, 0, 0, 0.2); 
 }
 
-/* Célula de ações centralizada */
+
 td:last-child {
     text-align: center;
 }
