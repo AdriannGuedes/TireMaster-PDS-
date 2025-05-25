@@ -5,36 +5,6 @@ export const listarPneus = async (req, res) => {
     res.json(pneus);
 }
 
-export const obterPorMarca = async (req, res) => {
-    try {
-        const { marca } = req.params;
-        const pneus = await Pneus.getPorMarca(marca);
-
-        if (pneus.length === 0) {
-            return res.status(404).json({ msg: 'Nenhum pneu encontrado com essa marca' });
-        }
-
-        res.json(pneus);
-    } catch (error) {
-        res.status(500).json({ msg: 'Erro ao buscar pneus por marca', error });
-    }
-};
-
-export const obterPorMedida = async (req, res) => {
-    try {
-        const { medida } = req.params;
-        const pneus = await Pneus.getPorMedida(medida);
-
-        if (pneus.length === 0) {
-            return res.status(404).json({ msg: 'Nenhum pneu encontrado com essa medida' });
-        }
-
-        res.json(pneus);
-    } catch (error) {
-        res.status(500).json({ msg: 'Erro ao buscar pneus por medida', error });
-    }
-};
-
 
 export const criarPneu = async (req, res) => {
     const { marca, medida, quantidade, preco } = req.body;

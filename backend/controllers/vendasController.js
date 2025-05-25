@@ -7,19 +7,13 @@ export const criarVenda = async (req, res) => {
         return res.status(400).json({ msg: 'A venda deve conter pelo menos um item.' });
     }
 
-    for (const item of itens) {
-        if (!item.marca || !item.medida || !item.quantidade) {
-            return res.status(400).json({ msg: 'Todos os campos dos itens são obrigatórios.' });
-        }
-    }
-
     const resultado = await Vendas.criarVenda(itens);
 
     if (resultado.erro) {
         return res.status(400).json({ msg: resultado.erro });
     }
 
-    res.status(201).json({ msg: 'Venda registrada', id: resultado });
+    res.status(201).json({ msg: 'Venda registrada com sucesso', id: resultado });
 };
 
 export const listarVendas = async (req, res) => {
