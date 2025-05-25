@@ -1,8 +1,10 @@
 import express from 'express';
-import { listarNotificacoes } from '../controllers/notifController.js';
+import { listarTodasNotificacoes, listarNotificacoesNaoLidas, marcarComoLida } from '../controllers/notifController.js';
 
 const router = express.Router();
 
-router.get('/newNotificacoes', listarNotificacoes);
+router.get('/todasNotificacoes', listarTodasNotificacoes);
+router.get('/notifNaoLidas', listarNotificacoesNaoLidas);
+router.put('/:id/marcarComoLida', marcarComoLida);
 
 export default router;
