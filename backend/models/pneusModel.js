@@ -16,38 +16,6 @@ export const getTodos = async () => {
     });
 };
 
-export const getPorMarca = async (marca) => {
-    const snapshot = await pneusRef.where('marca', '==', marca).get();
-    if (snapshot.empty) {
-        return [];
-    }
-    return snapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-            id: doc.id,
-            ...data,
-            dataCadastro: data.dataCadastro?.toDate().toISOString()
-        };
-    });
-};
-
-export const getPorMedida = async (medida) => {
-    const snapshot = await pneusRef.where('medida', '==', medida).get();
-
-    if (snapshot.empty) {
-        return [];
-    }
-
-    return snapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-            id: doc.id,
-            ...data,
-            dataCadastro: data.dataCadastro?.toDate().toISOString()
-        };
-    });
-};
-
 export const criarPneu = async (dados) => {
     dados.dataCadastro = Timestamp.now();
     const docRef = await pneusRef.add(dados);

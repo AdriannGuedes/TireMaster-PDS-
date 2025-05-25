@@ -21,6 +21,7 @@ export const verificarEstoqueBaixo = async () => {
             notificacoes.push({
                 data: Timestamp.now(),
                 mensagem,
+                lida: false
             });
         }
     });
