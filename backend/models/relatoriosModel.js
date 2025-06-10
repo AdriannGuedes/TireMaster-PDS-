@@ -1,4 +1,4 @@
-import { db } from '../db/firebase.js';
+import { db } from '../config/firebase.js';
 import { startOfWeek, endOfWeek, formatISO } from 'date-fns';
 
 const vendasRef = db.collection('Vendas');
@@ -33,7 +33,20 @@ export const Relatorios = {
 
         snapshot.forEach(doc => {
             const item = doc.data();
-            total += (item.quantidade || 0) * (item.valorUnitario || 0);
+            console.log('Item encontrado:', item);
+
+            const quantidade = Number(item.quantidade) || 0;
+
+            
+            let valorUnitario = item.valorUnitario;
+
+            if (typeof valorUnitario === 'string') {
+                valorUnitario = parseFloat(valorUnitario.replace(',', '.'));
+            } else {
+                valorUnitario = Number(valorUnitario) || 0;
+            }
+
+            total += quantidade * valorUnitario;
         });
 
         const pneuDoc = await pneusRef.doc(pneuId).get();
@@ -41,7 +54,7 @@ export const Relatorios = {
 
         return {
             pneu: pneu ? `${pneu.marca} ${pneu.medida}` : 'Desconhecido',
-            total
+            total: total.toFixed(2) 
         };
     },
 

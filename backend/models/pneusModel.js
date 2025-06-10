@@ -35,7 +35,10 @@ export const atualizarPneu = async (id, dados) => {
             }
         }
 
-        // Valida se a quantidade é número
+        if (typeof dados.preco === 'string') {
+            dados.preco = parseFloat(dados.preco.replace(',', '.')).toFixed(2);
+        }
+
         if (typeof dados.quantidade !== 'number') {
             throw new Error('O campo "quantidade" deve ser um número.');
         }
