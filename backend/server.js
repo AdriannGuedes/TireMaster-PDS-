@@ -6,7 +6,7 @@ import pneuRoutes from './routes/pneusRoutes.js'
 import vendasRoutes from './routes/vendasRoutes.js'
 import noCacheMiddleware from './middlewares/noCacheMiddleware.js';
 import notificacoesRoutes from './routes/notifRoutes.js';
-import relatorioRoutes from './routes/relatorioRoutes.js';
+import relatorioRoutes from './routes/relatoriosRoutes.js';
 
 
 dotenv.config();
@@ -21,7 +21,7 @@ app.use('/login', authRoutes);
 app.use('/pneus', pneuRoutes);
 app.use('/vendas', vendasRoutes);
 app.use('/notificacoes', notificacoesRoutes);
-app.use('/relatorio', relatorioRoutes);
+app.use('/relatorios', relatorioRoutes);
 
 
 const PORT = process.env.PORT || 3000;
