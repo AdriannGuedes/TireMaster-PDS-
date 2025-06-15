@@ -3,7 +3,7 @@ import { Timestamp } from 'firebase-admin/firestore';
 
 const pneusRef = db.collection('Pneus');
 
-export const getTodos = async () => {
+export const BuscarTodos = async () => {
     const snapshot = await pneusRef.get();
     return snapshot.docs.map(doc => {
         const data = doc.data();
@@ -24,7 +24,7 @@ export const criarPneu = async (dados) => {
 
 export const atualizarPneu = async (id, dados) => {
     try {
-        // Lista dos campos obrigatórios
+       
         const camposObrigatorios = ['marca', 'medida', 'preco', 'quantidade'];
 
         for (const campo of camposObrigatorios) {
