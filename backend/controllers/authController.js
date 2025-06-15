@@ -16,7 +16,7 @@ export const login = async (req, res) => {
         const match = await bcrypt.compare(senha, userData.Senha);
         if (!match) return res.status(401).json({ msg: 'Senha incorreta' });
 
-        const token = jwt.sign({ id: userDoc.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign({ id: userDoc.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
 
     } catch (error) {

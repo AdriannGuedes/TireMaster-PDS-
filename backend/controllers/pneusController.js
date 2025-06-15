@@ -1,7 +1,7 @@
 import * as Pneus from '../models/pneusModel.js';
 
 export const listarPneus = async (req, res) => {
-    const pneus = await Pneus.getTodos();
+    const pneus = await Pneus.BuscarTodos();
     res.json(pneus);
 }
 
@@ -9,7 +9,6 @@ export const listarPneus = async (req, res) => {
 export const criarPneu = async (req, res) => {
     const { marca, medida, quantidade, preco } = req.body;
 
-    // Verifica se todos os campos obrigatórios foram preenchidos
     if (!marca || !medida || quantidade == null || preco == null) {
         return res.status(400).json({ msg: 'Preencha todos os campos obrigatórios: marca, medida, quantidade e preco.' });
     }
