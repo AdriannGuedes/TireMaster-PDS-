@@ -6,7 +6,6 @@ import {
   excluirPneu,
   adicionarEstoque
 } from '../controllers/pneusController.js';
-
 import { verificarToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
