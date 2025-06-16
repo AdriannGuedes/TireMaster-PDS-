@@ -1,13 +1,32 @@
 .layout {
   display: flex;
-  height: 100vh;
   flex-direction: column;
+  height: 100vh;
 }
 
+.body-container {
+  display: flex;
+  flex: 1;
+  margin-top: 41px; /* compensar header fixo */
+}
 
 .page-content {
+  flex: 1;
+  margin-left: 120px;
   padding: 15px;
-  margin-left: 116px;
-  background: #f5f5f5;  /* Se necessário, ajuste para o seu fundo */
-  min-height: 100vh; /* Garante que o layout ocupe toda a altura da tela */
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 41px);
+  box-sizing: border-box;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .body-container {
+    flex-direction: column;
+  }
+
+  .page-content {
+    margin-left: 0;
+    padding-bottom: 60px; /* evitar que sidebar cubra */
+  }
 }

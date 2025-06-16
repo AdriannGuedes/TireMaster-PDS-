@@ -4,18 +4,17 @@ import Header from '../header/Header.jsx';
 import './Layout.css';
 import { Outlet } from 'react-router-dom';
 
-const Layout = ({onLogout}) => {
+const Layout = ({ onLogout }) => {
   return (
     <div className="layout">
-      <Sidebar onLogout={onLogout}/>
-      <div className="main-content">
-        <Header onLogout={onLogout}/>
+      <Header onLogout={onLogout} />
+      <div className="body-container">
+        <Sidebar onLogout={onLogout} />
         <div className="page-content">
-          <Outlet/>
+          <Outlet />
         </div>
       </div>
     </div>
   );
 };
-
 export default Layout;

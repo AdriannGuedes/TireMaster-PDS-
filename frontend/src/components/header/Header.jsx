@@ -8,8 +8,8 @@ const Header = ({ onLogout }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    if (onLogout) onLogout(); 
-    navigate('/'); 
+    onLogout(); 
+    navigate('/login'); 
   };
 
   return (

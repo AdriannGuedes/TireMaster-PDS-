@@ -11,6 +11,7 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(''); 
 
     try {
       const response = await axios.post('http://localhost:3000/login', {
@@ -20,12 +21,25 @@ const Login = ({ onLogin }) => {
 
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
-        onLogin(); // chama o callback para atualizar estado de autenticação
+        onLogin();
         navigate('/home');
       }
     } catch (error) {
-      console.error(error);
-      setError('Email ou senha incorretos');
+      if (error.response) {
+        if (error.response.status === 401) {
+          console.warn('Email ou senha incorretos.');
+          setError('E-mail ou senha incorretos.');
+        } else {
+          console.error(`Erro ${error.response.status}: ${error.response.data.msg || 'Erro desconhecido do servidor.'}`);
+          setError('Erro ao tentar fazer login. Tente novamente mais tarde.');
+        }
+      } else if (error.request) {
+        console.error('Sem resposta do servidor. Verifique a conexão com a API.');
+        setError('Servidor indisponível. Tente novamente em instantes.');
+      } else {
+        console.error('Erro ao configurar a requisição:', error.message);
+        setError('Erro inesperado ao tentar fazer login.');
+      }
     }
   };
 

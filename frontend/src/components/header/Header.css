@@ -1,28 +1,29 @@
 .header {
   height: 41px;
-  background-color: #005fdb; 
+  background-color: #005fdb;
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   color: #202020;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 20px; 
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
+  flex-grow: 1;
   text-align: center;
   font-family: 'Playfair Display', serif;
-  flex-grow: 1; 
-  text-align: center; 
 }
 
-.header svg { 
-  font-size: 15px; 
+.header svg {
+  font-size: 15px;
   cursor: pointer;
 }
-
-  
