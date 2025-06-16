@@ -19,7 +19,6 @@ const AppRoutes = () => {
             setIsAuthenticated(!!token);
         };
         checkAuth();
-
         window.addEventListener('storage', checkAuth);
         return () => window.removeEventListener('storage', checkAuth);
     }, []);
@@ -27,27 +26,27 @@ const AppRoutes = () => {
     return (
         <Router>
             <Routes>
+                <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
                 <Route
                     path="/"
                     element={
-                        isAuthenticated
-                            ? <Navigate to="/home" />
-                            : <Login onLogin={() => setIsAuthenticated(true)} />
+                        isAuthenticated ? (
+                            <Layout onLogout={() => setIsAuthenticated(false)} />
+                        ) : (
+                            <Navigate to="/login" />
+                        )
                     }
-                />
+                >
+                    <Route path="home" element={<Home />} />
+                    <Route path="cadastro" element={<Cadastro />} />
+                    <Route path="estoque" element={<Estoque />} />
+                    <Route path="novaVenda" element={<NovaVenda />} />
+                    <Route path="historicoVendas" element={<HistoricoVendas />} />
+                    <Route path="historicoNotificacoes" element={<HistoricoNotificacoes />} />
+                    <Route path="relatoriosVendas" element={<RelatoriosVendas />} />
+                </Route>
 
-                {isAuthenticated && (
-                    <Route path="/" element={<Layout onLogout={() => setIsAuthenticated(false)} />}>
-                        <Route path="home" element={<Home />} />
-                        <Route path="cadastro" element={<Cadastro />} />
-                        <Route path="estoque" element={<Estoque />} />
-                        <Route path="novaVenda" element={<NovaVenda />} />
-                        <Route path="historicoVendas" element={<HistoricoVendas />} />
-                        <Route path="historicoNotificacoes" element={<HistoricoNotificacoes />} />
-                        <Route path="relatoriosVendas" element={<RelatoriosVendas />} />
-                    </Route>
-                )}
-                <Route path="*" element={<Navigate to={isAuthenticated ? "/home" : "/"} />} />
+                <Route path="*" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
             </Routes>
         </Router>
     );
