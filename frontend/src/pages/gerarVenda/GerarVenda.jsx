@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './GerarVenda.css';
 import { FaTrash } from 'react-icons/fa';
 
@@ -12,11 +12,8 @@ const RegistrarVenda = () => {
 
     useEffect(() => {
         const fetchPneus = async () => {
-            const token = localStorage.getItem('authToken');
             try {
-                const response = await axios.get('http://localhost:3000/pneus/', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const response = await axiosInstance.get('/pneus/');
                 setPneus(response.data);
             } catch (error) {
                 console.error('Erro ao buscar pneus:', error);
@@ -68,13 +65,7 @@ const RegistrarVenda = () => {
 
                 }))
             };
-            console.log('Itens antes de enviar:', itens);
-
-            console.log('Payload enviado:', payload);
-
-            const response = await axios.post('http://localhost:3000/vendas/gerarVenda', payload, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-            });
+            const response = await axiosInstance.post('/vendas/gerarVenda', payload);
 
             setMensagem(response.data.msg || 'Venda registrada com sucesso!');
             setTimeout(() => {
@@ -129,7 +120,7 @@ const RegistrarVenda = () => {
 
                 <button onClick={adicionarItem}>Adicionar Item</button>
             </div>
-
+            <div className='itens-scroll'></div>
             <table>
                 <thead>
                     <tr>

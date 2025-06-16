@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './Home.css';
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
 
   const buscarNotificacoes = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/notificacoes/notifNaoLidas');
+      const response = await axiosInstance.get('/notificacoes/notifNaoLidas');
       setNotificacoes(response.data);
     } catch (error) {
       console.error('Erro ao buscar notificações:', error);

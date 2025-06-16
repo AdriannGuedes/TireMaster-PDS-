@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './Estoque.css';
 import FormEditarPneuModal from '../../components/modalEditarPneu/ModalEditarPneu.jsx';
 import ModalConfirmacao from '../../components/modalExcluirPneu/ModalExcluirPneu.jsx';
@@ -17,11 +17,8 @@ const Estoque = () => {
     }, []);
 
     const fetchPneus = async () => {
-        const token = localStorage.getItem('authToken');
         try {
-            const response = await axios.get('http://localhost:3000/pneus/', {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await axiosInstance.get('/pneus/');
             setPneus(response.data);
             setFilteredPneus(response.data);
         } catch (error) {
@@ -48,11 +45,8 @@ const Estoque = () => {
     };
 
     const confirmarExclusao = async () => {
-        const token = localStorage.getItem('authToken');
         try {
-            await axios.delete(`http://localhost:3000/pneus/delete/${idParaExcluir}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            await axiosInstance.delete(`/pneus/delete/${idParaExcluir}`);
             fetchPneus();
         } catch (error) {
             console.error('Erro ao excluir pneu', error);
@@ -71,10 +65,7 @@ const Estoque = () => {
 
     const handleSaveEdit = async (dadosEditados) => {
         try {
-            const token = localStorage.getItem('authToken');
-            await axios.put(`http://localhost:3000/pneus/${dadosEditados.id}`, dadosEditados, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            await axiosInstance.put(`http://localhost:3000/pneus/${dadosEditados.id}`, dadosEditados);
             setPneuEditando(null);
             fetchPneus();
         } catch (error) {

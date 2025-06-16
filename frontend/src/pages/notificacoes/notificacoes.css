@@ -1,7 +1,7 @@
 .container {
-  padding: 20px;
-  max-width: 670px;
-  margin: 0 auto;
+  padding: 8px;
+  max-width: 690px;
+ margin: 20px auto 0 auto; 
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,6 +27,7 @@ h2 {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  max-width: 640px;
 }
 
 .notificacao-card:hover {
@@ -74,6 +75,7 @@ h2 {
   border: none;
   padding: 6px 10px;
   border-radius: 6px;
+  max-width: 610px;
   cursor: pointer;
   font-size: 0.9rem;
   margin: 0 12px 0 12px; 
@@ -90,4 +92,41 @@ h2 {
 p {
   margin: 0;
   padding: 0;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 600px) {
+  .container {
+    max-width: 95%;
+    padding: 15px 10px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+  .notificacao-lista {
+    max-height: 150px; /* menos altura para mobile */
+  }
+  .notificacao-card {
+    padding: 10px 8px;
+    margin-bottom: 10px;
+  }
+  .topo-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 0 8px;
+  }
+  .mensagem {
+    font-size: 0.95rem;
+  }
+  .data-texto {
+    font-size: 0.75rem;
+    padding: 0 8px 0 0;
+  }
+  .botao-ler {
+    padding: 5px 8px;
+    font-size: 0.85rem;
+    margin: 0 8px 0 0;
+  }
 }

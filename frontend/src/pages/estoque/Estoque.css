@@ -1,12 +1,11 @@
 .estoque-container {
     max-width: 1000px;
-    margin: 40px auto;
+    max-height: 260px;
+    margin: 15px auto 40px;
     padding: 20px;
-    margin-top: 15px;
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-
 }
 
 .estoque-container h2 {
@@ -15,51 +14,61 @@
     color: #333;
     font-family: 'Arial', sans-serif;
     margin-bottom: 20px;
-    margin-top: 5px;
-}
-
-.scrow {
-    max-height: 205px; /* Ajuste a altura conforme necessário */
-    overflow-y: auto; /* Permite a rolagem vertical */
+    margin-top: 0px;
 }
 
 .filters {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .filter-item {
     width: 20%;
-    margin-right: 22px;
+    min-width: 160px;
 }
 
 .filter-item input {
-    width: 100%;
-    padding: 10px;
+    width: 80%;
+    padding: 10px 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 11px;
+    border-radius: 6px;
+    font-size: 13px;
     font-family: 'Roboto', sans-serif;
     background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
 }
 
 .filter-item input:focus {
     border-color: #007bff;
     outline: none;
+    background-color: #fff;
+}
+
+.pneu-list {
+    overflow-y: auto;
+    max-height: 138px;
+    border-radius: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.pneu-list::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+.pneu-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
 }
 
 .pneu-list table {
     width: 100%;
     border-collapse: collapse;
-}
-
-.pneu-list {
-    overflow-y: auto;
-    max-height: 150px;
-    border-radius: 5px;
-    overflow-y: auto;
+    min-width: 600px;
 }
 
 .pneu-list th,
@@ -72,6 +81,15 @@
 .pneu-list th {
     background-color: #50a5ff;
     color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pneu-list td {
+    font-size: 14px;
+    color: #333;
 }
 
 .pneu-list tr:nth-child(even) {
@@ -92,43 +110,79 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
     padding: 5px 10px;
-    border: 2px solid black; 
+    border: 2px solid black;
     border-radius: 6px;
-    background-color: transparent; 
+    background-color: transparent;
     cursor: pointer;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 40px;
-    transition: background-color 0.3s, color 0.3s; 
+    transition: background-color 0.3s, color 0.3s;
 }
 
-
 .btn-edit {
-    color: #FFD700; 
+    color: #FFD700;
 }
 
 .btn-edit:hover {
-    background-color: rgba(255, 215, 0, 0.2); 
+    background-color: rgba(255, 215, 0, 0.2);
 }
 
-
-
 .btn-delete {
-    color: #FF0000; 
+    color: #FF0000;
 }
 
 .btn-delete:hover {
-    background-color: rgba(255, 0, 0, 0.2); 
+    background-color: rgba(255, 0, 0, 0.2);
 }
-
 
 td:last-child {
     text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .estoque-container {
+        margin: 10px 10px 30px;
+        padding: 15px;
+        max-height: 780px;
+    }
+
+    .estoque-container h2 {
+        font-size: 22px;
+    }
+
+    .filters {
+        flex-direction: column;
+        gap: 15px;
+
+    }
+
+    .filter-item {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .pneu-list {
+        max-height: none;
+        overflow-x: auto;
+    }
+
+    .pneu-list table {
+        min-width: 580px;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        min-width: 36px;
+        padding: 4px 8px;
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './Cadastro.css';
 
 const Cadastro = () => {
@@ -9,15 +9,15 @@ const Cadastro = () => {
   const [quantidade, setQuantidade] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [progress, setProgress] = useState(0); 
+  const [progress, setProgress] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    setProgress(10); 
+    setProgress(10);
 
-    
+
     if (!marca || !medida || !preco || !quantidade) {
       setError('Todos os campos devem ser preenchidos!');
       setLoading(false);
@@ -30,34 +30,30 @@ const Cadastro = () => {
       return;
     }
 
+    const precoFormatado = parseFloat(preco.replace(',', '.')).toFixed(2);
+
     const novoPneu = {
       marca,
       medida,
-      preco,
+      preco: Number(precoFormatado),
       quantidade: parseInt(quantidade, 10),
     };
 
-    const token = localStorage.getItem('authToken');
 
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
-        if (prevProgress < 80) return prevProgress + 10; 
+        if (prevProgress < 80) return prevProgress + 10;
         return prevProgress;
       });
     }, 300);
 
     try {
-      const response = await axios.post(
-        'http://localhost:3000/pneus/cadastrarPneu',
-        novoPneu,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await axiosInstance.post(
+        '/pneus/cadastrarPneu',
+        novoPneu
       );
-      clearInterval(interval); 
-      setProgress(100); 
+      clearInterval(interval);
+      setProgress(100);
       console.log('Pneu cadastrado com sucesso:', response.data);
       setMarca('');
       setMedida('');
@@ -66,7 +62,7 @@ const Cadastro = () => {
       setLoading(false);
     } catch (error) {
       clearInterval(interval);
-      setProgress(100); 
+      setProgress(100);
       console.error('Erro ao cadastrar pneu:', error.response || error);
       setError('Erro ao cadastrar pneu! Tente novamente mais tarde.');
       setLoading(false);

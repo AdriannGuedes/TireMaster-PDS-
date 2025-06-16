@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import { Bar, Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -11,7 +11,9 @@ import {
     Title,
     Tooltip,
     Legend,
+    Filler,
 } from 'chart.js';
+import './Relatorios.css';
 
 ChartJS.register(
     CategoryScale,
@@ -21,7 +23,8 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler,
 );
 
 const Relatorios = () => {
@@ -47,7 +50,7 @@ const Relatorios = () => {
 
     const buscarVendasSemana = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/relatorios/vendasPorSemana');
+            const response = await axiosInstance.get('/relatorios/vendasPorSemana');
             setVendasSemana(response.data);
         } catch (error) {
             console.error('Erro ao buscar vendas da semana:', error);
@@ -55,17 +58,18 @@ const Relatorios = () => {
     };
 
     const buscarPneus = async () => {
+
         try {
-            const response = await axios.get('http://localhost:3000/pneus/');
+            const response = await axiosInstance.get('/pneus/');
             setPneus(response.data);
         } catch (error) {
-            console.error('Erro ao buscar pneus:', error);
+            console.error('Erro ao buscar pneus:', error.response?.data || error.message);
         }
     };
 
     const buscarVendasPorPneu = async (pneuId) => {
         try {
-            const response = await axios.get(`http://localhost:3000/relatorios/vendasPorPneu/${pneuId}`);
+            const response = await axiosInstance.get(`/relatorios/vendasPorPneu/${pneuId}`);
             setVendasPorPneu(response.data);
         } catch (error) {
             console.error('Erro ao buscar vendas por pneu:', error);
@@ -74,7 +78,7 @@ const Relatorios = () => {
 
     const buscarPneusMaisVendidos = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/relatorios/pneusMaisVendidos');
+            const response = await axiosInstance.get('/relatorios/pneusMaisVendidos');
             setPneusMaisVendidos(response.data);
         } catch (error) {
             console.error('Erro ao buscar pneus mais vendidos:', error);
@@ -96,37 +100,54 @@ const Relatorios = () => {
     };
 
     const dadosVendasPorPneu = {
-        labels: vendasPorPneu.map(item => `Semana ${item.semana}`),
+        labels: ['Total'],
         datasets: [
             {
-                label: 'Valor Vendas Pneu (R$)',
-                data: vendasPorPneu.map(item => item.valorTotal),
-                backgroundColor: '#ff9800',
+                label: 'Valor Vendas por Pneu (R$)',
+                data: [parseFloat(vendasPorPneu.total)],
+                backgroundColor: '#0073ff',
             },
         ],
     };
 
+    const optionsPneusMaisVendidos = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1,
+                    callback: function (value) {
+                        if (Number.isInteger(value)) {
+                            return value;
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+    };
+
     const dadosPneusMaisVendidos = {
-        labels: pneusMaisVendidos.map(item => `${item.marca} ${item.medida}`),
+        labels: pneusMaisVendidos.map(item => item.pneu),
         datasets: [
             {
                 label: 'Quantidade Vendida',
-                data: pneusMaisVendidos.map(item => item.quantidadeVendida),
-                backgroundColor: '#4caf50',
+                data: pneusMaisVendidos.map(item => item.quantidade),
+                backgroundColor: '#0073ff',
             },
         ],
     };
 
     return (
-        <div className="relatorios-container">
-            <h2>Relatórios de Vendas e Giro de Mercadoria</h2>
-
-            <section className="grafico-semana">
+        <div className="relatorios-container-scroll">
+            <div className="grafico-card">
                 <h3>Vendas na Última Semana</h3>
-                <Line data={dadosVendasSemana} />
-            </section>
-
-            <section className="grafico-pneu">
+                <div style={{ width: '100%', maxWidth: 600 }}>
+                    <Line data={dadosVendasSemana} height={200} />
+                </div>
+            </div>
+            <div className="grafico-card">
                 <h3>Valor de Vendas por Pneu</h3>
                 <select
                     value={pneuSelecionado}
@@ -142,16 +163,22 @@ const Relatorios = () => {
                 </select>
 
                 {pneuSelecionado ? (
-                    <Bar data={dadosVendasPorPneu} />
+                    <div style={{ width: '100%', maxWidth: 600 }}>
+                        <Bar data={dadosVendasPorPneu} height={200} />
+                    </div>
                 ) : (
                     <p>Selecione um pneu para ver o gráfico.</p>
                 )}
-            </section>
+            </div>
 
-            <section className="grafico-giro">
+
+            <div className="grafico-card">
                 <h3>Pneus com Maior Giro</h3>
-                <Bar data={dadosPneusMaisVendidos} />
-            </section>
+                <div style={{ width: '100%', maxWidth: 600 }}>
+                    <Bar data={dadosPneusMaisVendidos} options={optionsPneusMaisVendidos} height={200} />
+                </div>
+            </div>
+
         </div>
     );
 };

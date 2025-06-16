@@ -1,6 +1,6 @@
 .venda-container {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 20px;
     background: #ffffff;
     border-radius: 5px;
@@ -83,7 +83,7 @@
 
 .venda-container button {
     padding: 10px;
-    background-color:  #0056b3;
+    background-color: #0056b3;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -107,4 +107,41 @@
     color: #3849ff;
     margin-bottom: 12px;
     font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .venda-container {
+        max-width: 95%;
+        padding: 15px 10px;
+        max-height: 75vh;
+    }
+
+    .venda-container h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .venda-container .form-item {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .venda-container select,
+    .venda-container input,
+    .venda-container .form-item button {
+        flex: unset;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .venda-container table,
+    .venda-container th,
+    .venda-container td {
+        font-size: 12px;
+    }
+
+    .venda-container button {
+        font-size: 13px;
+        padding: 10px 8px;
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './HistoricoVendas.css';
 
 const HistoricoVendas = () => {
@@ -9,19 +9,12 @@ const HistoricoVendas = () => {
     useEffect(() => {
         const carregarVendas = async () => {
             try {
-                const token = localStorage.getItem('authToken');
-                const resVendas = await axios.get('http://localhost:3000/vendas/listarVendas', {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-
+                const resVendas = await axiosInstance.get('/vendas/listarVendas');
                 const vendas = resVendas.data;
                 const vendasDetalhadas = await Promise.all(
                     vendas.map(async (venda) => {
                         try {
-                            const resItens = await axios.get(`http://localhost:3000/vendas/${venda.id}/itens`, {
-                                headers: { Authorization: `Bearer ${token}` }
-                            });
-
+                            const resItens = await axiosInstance.get(`/vendas/${venda.id}/itens`);
                             return {
                                 ...venda,
                                 itens: resItens.data

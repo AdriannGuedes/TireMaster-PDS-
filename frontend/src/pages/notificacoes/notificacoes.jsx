@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance.js';
 import './notificacoes.css';
 
 const HistoricoNotificacoes = () => {
@@ -7,7 +7,7 @@ const HistoricoNotificacoes = () => {
 
   const fetchNotificacoes = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/notificacoes/todasNotificacoes');
+      const res = await axiosInstance.get('/notificacoes/todasNotificacoes');
       setNotificacoes(res.data);
     } catch (error) {
       console.error('Erro ao buscar notificações:', error);
@@ -16,7 +16,7 @@ const HistoricoNotificacoes = () => {
 
   const marcarComoLida = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/notificacoes/${id}/marcarComoLida`);
+      await axiosInstance.put(`/notificacoes/${id}/marcarComoLida`);
       setNotificacoes((prev) =>
         prev.map((n) => (n.id === id ? { ...n, lida: true } : n))
       );
