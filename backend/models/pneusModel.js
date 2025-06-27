@@ -18,13 +18,19 @@ export const BuscarTodos = async () => {
 
 export const criarPneu = async (dados) => {
     dados.dataCadastro = Timestamp.now();
+
+    if (dados.preco !== undefined) {
+        const precoNumerico = parseFloat(dados.preco);
+        dados.preco = precoNumerico.toFixed(2); 
+    }
+
     const docRef = await pneusRef.add(dados);
     return docRef.id;
 };
 
 export const atualizarPneu = async (id, dados) => {
     try {
-       
+
         const camposObrigatorios = ['marca', 'medida', 'preco', 'quantidade'];
 
         for (const campo of camposObrigatorios) {
