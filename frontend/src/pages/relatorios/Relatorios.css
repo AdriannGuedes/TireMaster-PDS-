@@ -1,8 +1,9 @@
 .relatorios-container-scroll {
     padding: 20px;
-    background-color: #f7f7f7;
+    background-color: #f1f4f8;
     font-family: Arial, sans-serif;
-    height: 85vh;
+    height: 91vh;
+    border-radius: 5px;
     box-sizing: border-box;
     overflow-y: auto;
 }

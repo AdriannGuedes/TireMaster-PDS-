@@ -92,7 +92,7 @@ const Relatorios = () => {
                 label: 'Valor de Vendas (R$)',
                 data: vendasSemana.map(item => item.valorTotal),
                 borderColor: '#0073ff',
-                backgroundColor: '#0073ff55',
+                backgroundColor: '#27567c',
                 fill: true,
                 tension: 0.3,
             },
@@ -105,7 +105,7 @@ const Relatorios = () => {
             {
                 label: 'Valor Vendas por Pneu (R$)',
                 data: [parseFloat(vendasPorPneu.total)],
-                backgroundColor: '#0073ff',
+                backgroundColor: '#27567c',
             },
         ],
     };
@@ -134,7 +134,7 @@ const Relatorios = () => {
             {
                 label: 'Quantidade Vendida',
                 data: pneusMaisVendidos.map(item => item.quantidade),
-                backgroundColor: '#0073ff',
+                backgroundColor: '#27567c',
             },
         ],
     };
@@ -144,7 +144,32 @@ const Relatorios = () => {
             <div className="grafico-card">
                 <h3>Vendas na Última Semana</h3>
                 <div style={{ width: '100%', maxWidth: 600 }}>
-                    <Line data={dadosVendasSemana} height={200} />
+                    <Line
+                        data={dadosVendasSemana}
+                        height={200}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return `R$ ${parseFloat(context.raw).toFixed(2)}`;
+                                        },
+                                    },
+                                },
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function (value) {
+                                            return `R$ ${parseFloat(value).toFixed(2)}`;
+                                        },
+                                    },
+                                },
+                            },
+                        }}
+                    />
                 </div>
             </div>
             <div className="grafico-card">
@@ -164,7 +189,32 @@ const Relatorios = () => {
 
                 {pneuSelecionado ? (
                     <div style={{ width: '100%', maxWidth: 600 }}>
-                        <Bar data={dadosVendasPorPneu} height={200} />
+                        <Bar
+                            data={dadosVendasPorPneu}
+                            height={200}
+                            options={{
+                                responsive: true,
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function (context) {
+                                                return `R$ ${parseFloat(context.raw).toFixed(2)}`;
+                                            },
+                                        },
+                                    },
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            callback: function (value) {
+                                                return `R$ ${parseFloat(value).toFixed(2)}`;
+                                            },
+                                        },
+                                    },
+                                },
+                            }}
+                        />
                     </div>
                 ) : (
                     <p>Selecione um pneu para ver o gráfico.</p>

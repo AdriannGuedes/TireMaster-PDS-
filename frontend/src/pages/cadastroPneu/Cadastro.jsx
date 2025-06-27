@@ -35,7 +35,7 @@ const Cadastro = () => {
     const novoPneu = {
       marca,
       medida,
-      preco: Number(precoFormatado),
+      preco: precoFormatado,
       quantidade: parseInt(quantidade, 10),
     };
 

@@ -2,9 +2,10 @@
   padding: 8px;
   max-width: 690px;
  margin: 20px auto 0 auto; 
-  background-color: #f9f9f9;
+  background-color: #f1f4f8;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 h2 {
@@ -70,7 +71,7 @@ h2 {
 }
 
 .botao-ler {
-  background-color: #0073ff;
+  background-color: #27567c;
   color: white;
   border: none;
   padding: 6px 10px;
@@ -82,7 +83,7 @@ h2 {
 }
 
 .botao-ler:hover {
-  background-color: #1976d2;
+  background-color: #004b96;
 }
 
 .botao-ler:focus {
@@ -93,8 +94,6 @@ p {
   margin: 0;
   padding: 0;
 }
-
-/* Responsividade para mobile */
 @media (max-width: 600px) {
   .container {
     max-width: 95%;
@@ -105,7 +104,7 @@ p {
     margin-bottom: 15px;
   }
   .notificacao-lista {
-    max-height: 150px; /* menos altura para mobile */
+    max-height: 80vh;
   }
   .notificacao-card {
     padding: 10px 8px;

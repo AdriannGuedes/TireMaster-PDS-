@@ -2,7 +2,7 @@
   max-width: 500px;
   margin: 20px auto 30px; 
   padding: 20px 15px;
-  background: #ffffff;
+  background: #f1f4f8;
   border-radius: 5px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
@@ -44,14 +44,14 @@
 }
 
 .form-row input:focus {
-  border-color: #007bff;
+  border-color: #27567c;
   background-color: #fff;
   outline: none;
 }
 
 .cadastro-container button {
   padding: 14px;
-  background-color: #007bff;
+  background-color: #2E5E85;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -62,7 +62,7 @@
 }
 
 .cadastro-container button:hover {
-  background-color: #0056b3;
+  background-color: #1b3952;
 }
 
 .loading-bar-container {
