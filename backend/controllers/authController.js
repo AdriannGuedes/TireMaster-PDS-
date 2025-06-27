@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import { db } from '../config/firebase.js';
 
 export const login = async (req, res) => {
-    console.log('Corpo da requisição:', req.body);
     const { email, senha } = req.body;
 
     try {
