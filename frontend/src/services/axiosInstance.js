@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// eslint-disable-next-line no-undef
+const baseURL = process.env.VITE_API_URL || 'http://localhost:3000';
+
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL,
 });
 
 axiosInstance.interceptors.request.use(
