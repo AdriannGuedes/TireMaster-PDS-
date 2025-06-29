@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../services/axiosInstance';
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     setError(''); 
 
     try {
-      const response = await axios.post( `${process.env.REACT_APP_API_URL}/login`, {
+      const response = await axiosInstance.post('/login', {
         email,
         senha,
       });
