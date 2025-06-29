@@ -19,6 +19,8 @@ const Login = ({ onLogin }) => {
         senha,
       });
 
+      console.log('RESPOSTA DA API:', response);
+
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
         onLogin();
