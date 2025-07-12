@@ -65,7 +65,7 @@ const Estoque = () => {
 
     const handleSaveEdit = async (dadosEditados) => {
         try {
-            await axiosInstance.put(`http://localhost:3000/pneus/${dadosEditados.id}`, dadosEditados);
+            await axiosInstance.put(`/pneus/${dadosEditados.id}`, dadosEditados);
             setPneuEditando(null);
             fetchPneus();
         } catch (error) {
